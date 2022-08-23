@@ -25,4 +25,6 @@ The greatest American football catch of all time [view here](https://www.youtube
 
 I hope the tardigrade shortage ends soon.
 
+click [here](https://www.youtube.com/watch?v=z6EchXyieos) for a good laugh
+
 
