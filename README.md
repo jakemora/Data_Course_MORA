@@ -19,4 +19,6 @@ This is my favorite [website](https://stockx.com)
 
 My favorite Line of code ```hello world```
 
+My wife is a contributor in this repository and I can't figure out why.
+
 
