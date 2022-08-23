@@ -8,4 +8,6 @@ My name is Jake
 
 I am a Biology Major
 
+This is my favorite [website](https://stockx.com)
+
 
