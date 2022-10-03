@@ -17,7 +17,8 @@ dat_long %>%
   ggplot(aes(x = Time, y = Absorbance,
              color = Environment)) +
   facet_wrap(~Substrate) +
-  geom_smooth(method = "loess")
+  geom_smooth() +
+  geom_blank()
 
 library(gganimate)
 
