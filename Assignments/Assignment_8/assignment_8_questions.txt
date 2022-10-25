@@ -1,1 +1,9 @@
-1. The predictor “Light” in the growth rate of mushrooms data set cannot be scientifically significant. Mushrooms don’t contain chlorophyll and its effects on growth rate are meaningless. 2. In the plots I created I did not find any non-linear relationships. If I had I would’ve used a logistical model which would include a binomial logistic model or a multinomial logistic model. https://techvidvan.com/tutorials/nonlinear-regression-in-r/3. df <- read.csv(“./Data/non_linear_relationship.csv”)mod <- nls(response ~ I(a * exp(b * predictor)),     data = df,     start = list(a = 1, b = 0),    trace = T)summary(mod)
+1. The predictor ?Light? in the growth rate of mushrooms data set cannot be scientifically significant. Mushrooms don?t contain chlorophyll and its effects on growth rate are meaningless. 
+2. In the plots I created I did not find any non-linear relationships. If I had I would?ve used a logistical model which would include a binomial logistic model or a multinomial logistic model. 
+https://techvidvan.com/tutorials/nonlinear-regression-in-r/
+3. df <- read.csv(?./non_linear_relationship.csv?)
+mod <- nls(response ~ I(a * exp(b * predictor)), 
+    data = df, 
+    start = list(a = 1, b = 0),
+    trace = T)
+summary(mod)
