@@ -1,0 +1,104 @@
+---
+title: "Assignment 9"
+author: "Jacob Mora"
+date: "2022-10-31"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message = FALSE,warning = FALSE)
+```
+
+In this document we will be looking at the `GradSchool_Admissions` dataset using the *tidyverse* and *easystats* package
+
+Here is a glimpse of the dataset:
+
+```{r}
+library(tidyverse)
+library(easystats)
+library(kableExtra)
+df <- read_csv("./GradSchool_Admissions.csv")
+theme_set(theme_bw())
+df %>% skimr::skim()
+```
+
+What I want to find out is if GRE and GPA and rank of school are significant indicators of admittance into graduate school.
+
+
+## Plots
+
+
+```{r}
+df %>% 
+  ggplot(aes(x=gpa,y=as.factor(rank))) +
+  geom_boxplot() +
+  facet_wrap(~admit) +
+  labs(x = "GPA",
+       y = "Rank")
+
+```
+
+
+
+
+
+This plot is showing the relationship between GPA, rank, and admittance. From the graph we can see that top rank schools aren't taking the students with the highest GPA's. We can also see that the average gpa across all ranks is higher for those who are admitted than those who aren't.
+
+
+
+
+```{r}
+df %>% 
+  ggplot(aes(x=gre,y=as.factor(rank))) +
+  geom_boxplot() +
+  facet_wrap(~admit) +
+  labs(x = "GRE",
+       y = "Rank")
+```
+
+
+
+
+
+In this figure we see the relationship between GRE, rank, and admittance. We can see that the mean for acceptance is relatively similar between all ranks. We can also see that the GRE score is on average higher for those who are accepted than those who are not.
+
+
+## Models
+
+Here we will find what significance our predictors have on the rank of school students are admitted to and we'll start by making a few models and choosing the best fit.
+
+```{r}
+mod1 <- glm(data = df, formula = admit ~ gre + gpa, family = "binomial")
+
+mod2 <- glm(data = df, formula = admit ~ gre + gpa + rank, family = "binomial")
+
+mod3 <- glm(data = df, formula = admit ~ gre * gpa, family = "binomial")
+
+mod4 <- glm(data = df, formula = admit ~ gre * gpa * rank, family = "binomial")
+
+compare_performance(mod1,mod2,mod3,mod4,rank = TRUE) %>% 
+  kable() %>% 
+  kable_classic()
+```
+
+Here is a plot of the performance of our models
+```{r}
+compare_performance(mod1,mod2,mod3,mod4,rank = TRUE) %>% 
+  plot()
+```
+
+
+Our model formula is:
+
+```{r}
+formula(mod2)
+```
+
+model output table:
+
+```{r}
+broom::tidy(mod2) %>% 
+  kable() %>% 
+  kable_classic()
+```
+From our table you can see that GPA, GRE, and rank of school are significant indicators of admittance into graduate school. We can see that GPA is a larger indicator of acceptance than GRE. The results weren't what I was expecting to see, mostly because of the negative relationship rank has with acceptance. In light of this you should get the best grades possible, study for the GRE, and have self awareness of what kind of school (based on your GPA and GRE) you should apply for. 
