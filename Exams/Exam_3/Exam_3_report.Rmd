@@ -1,0 +1,15 @@
+---
+title: "Exam 3"
+author: "Jacob Mora"
+date: "2022-12-01"
+output: html_document
+---
+# Exam 3
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+
+
+
+
